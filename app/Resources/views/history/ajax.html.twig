@@ -1,0 +1,12 @@
+<table class="table">
+    <tbody>
+    {% for rent in rents %}
+        <tr>
+            <th>{{ rent.car }}</th>
+            <th>{{ rent.client }}</th>
+            <th>{{ rent.startAt|date }}</th>
+            <th>{{ rent.endAt|date }}</th>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% set title = "История проката" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ title }}</h1>
+        <form action="" id="filter" class="form-inline filter">
+            <div class="form-group">
+                <label class="sr-only" for="car">Авто</label>
+                <select name="car" id="car" class="form-control">
+                    <option value="">Все авто</option>
+                    {% for car in cars %}
+                        <option value="{{ car.id }}">{{ car }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">Поиск</button>
+        </form>
+        <div id="data">
+            {{ include('history/ajax.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function() {
+            var $filter = $('#filter'), $data = $('#data');
+
+            $filter.on('submit', function(e) {
+                e.preventDefault();
+
+                var xhr = $.ajax({
+                    url: '{{ path('history_ajax') }}',
+                    data: $filter.serialize(),
+                    dataType: 'html'
+                });
+
+                xhr.done(function(data) {
+                    $data.html(data);
+                });
+
+                xhr.fail(function() {
+                    $data.text('Что-то пошло не так');
+                });
+            });
+        });
+    </script>
+{% endblock %}
