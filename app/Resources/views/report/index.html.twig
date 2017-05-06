@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% set title = "Отчет по продолжительности" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ title }}</h1>
+        <table class="table">
+            <tbody>
+            {% for row in data %}
+                <tr>
+                    <td>{{ row.brand_name }}</td>
+                    <td>{{ row.office_name }}</td>
+                    <td class="text-right">{{ row.duration|number_format(2) }} д.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

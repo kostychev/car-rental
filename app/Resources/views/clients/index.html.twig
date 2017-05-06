@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% set title = "Клиенты" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ title }}</h1>
+        <p>
+            <a href="{{ path('new_client') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus"></span>
+                Новый клиент
+            </a>
+        </p>
+        <table class="table">
+            <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client.id }}</td>
+                    <td>{{ client }}</td>
+                    <td>{{ client.phone }}</td>
+                    <td class="text-right text-nowrap">
+                        <a href="{{ path('edit_client', {id: client.id}) }}" class="btn btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

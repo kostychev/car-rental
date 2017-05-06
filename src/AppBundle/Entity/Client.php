@@ -3,13 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use function implode;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Арендатор
  *
- * @ORM\Table(name="client")
  * @ORM\Entity()
+ * @ORM\Table(name="clients")
  */
 class Client
 {
@@ -26,6 +26,8 @@ class Client
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=100)
      */
     private $lastName;
 
@@ -33,6 +35,8 @@ class Client
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=100)
      */
     private $firstName;
 
@@ -40,6 +44,8 @@ class Client
      * @var string
      *
      * @ORM\Column(name="middle_name", type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=100)
      */
     private $middleName;
 
@@ -47,6 +53,8 @@ class Client
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=32)
+     * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/8[0-9]{10}$/")
      */
     private $phone;
 

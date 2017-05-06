@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% set title = "Новый авто" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ title }}</h1>
+        {{ form_start(form) }}
+        {{ form_row(form.model, {label: 'Марка авто'}) }}
+        {{ form_row(form.number, {label: 'Гос. номер', help: 'Например: А123ВВ159'}) }}
+        {{ form_rest(form) }}
+        <p class="text-right">
+            <a href="{{ path('cars') }}" class="btn btn-danger">Отмена</a>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </p>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

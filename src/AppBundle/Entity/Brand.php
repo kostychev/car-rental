@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Марка авто
  *
- * @ORM\Table(name="brand")
  * @ORM\Entity()
+ * @ORM\Table(name="brands")
  */
 class Brand
 {

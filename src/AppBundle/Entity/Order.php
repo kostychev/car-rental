@@ -5,13 +5,18 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Прокат
+ * Заказ
  *
- * @ORM\Table(name="rent")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\RentRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OrderRepository")
+ * @ORM\Table(name="orders")
  */
-class Rent
+class Order
 {
+    const STATUS_NEW = 'new';
+    const STATUS_RESERVED = 'reserved';
+    const STATUS_RETURNED = 'returned';
+    const STATUS_CANCELED = 'canceled';
+
     /**
      * @var int
      *
@@ -60,6 +65,13 @@ class Rent
     private $car;
 
     /**
+     * @var Office
+     *
+     * @ORM\ManyToOne(targetEntity="Office")
+     */
+    private $returnOffice;
+
+    /**
      * Get id
      *
      * @return int
@@ -74,7 +86,7 @@ class Rent
      *
      * @param \DateTime $startAt
      *
-     * @return Rent
+     * @return Order
      */
     public function setStartAt($startAt)
     {
@@ -98,7 +110,7 @@ class Rent
      *
      * @param \DateTime $endAt
      *
-     * @return Rent
+     * @return Order
      */
     public function setEndAt($endAt)
     {
@@ -120,11 +132,11 @@ class Rent
     /**
      * Set office
      *
-     * @param \AppBundle\Entity\Office $office
+     * @param Office $office
      *
-     * @return Rent
+     * @return Order
      */
-    public function setOffice(\AppBundle\Entity\Office $office)
+    public function setOffice(Office $office)
     {
         $this->office = $office;
 
@@ -134,7 +146,7 @@ class Rent
     /**
      * Get office
      *
-     * @return \AppBundle\Entity\Office
+     * @return Office
      */
     public function getOffice()
     {
@@ -144,11 +156,11 @@ class Rent
     /**
      * Set client
      *
-     * @param \AppBundle\Entity\Client $client
+     * @param Client $client
      *
-     * @return Rent
+     * @return Order
      */
-    public function setClient(\AppBundle\Entity\Client $client)
+    public function setClient(Client $client)
     {
         $this->client = $client;
 
@@ -158,7 +170,7 @@ class Rent
     /**
      * Get client
      *
-     * @return \AppBundle\Entity\Client
+     * @return Client
      */
     public function getClient()
     {
@@ -168,11 +180,11 @@ class Rent
     /**
      * Set car
      *
-     * @param \AppBundle\Entity\Car $car
+     * @param Car $car
      *
-     * @return Rent
+     * @return Order
      */
-    public function setCar(\AppBundle\Entity\Car $car)
+    public function setCar(Car $car)
     {
         $this->car = $car;
 
@@ -182,10 +194,34 @@ class Rent
     /**
      * Get car
      *
-     * @return \AppBundle\Entity\Car
+     * @return Car
      */
     public function getCar()
     {
         return $this->car;
+    }
+
+    /**
+     * Set returnOffice
+     *
+     * @param Office $returnOffice
+     *
+     * @return Order
+     */
+    public function setReturnOffice(Office $returnOffice = null)
+    {
+        $this->returnOffice = $returnOffice;
+
+        return $this;
+    }
+
+    /**
+     * Get returnOffice
+     *
+     * @return Office
+     */
+    public function getReturnOffice()
+    {
+        return $this->returnOffice;
     }
 }

@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Точка проката
  *
- * @ORM\Table(name="office")
  * @ORM\Entity()
+ * @ORM\Table(name="offices")
  */
 class Office
 {
@@ -60,5 +60,10 @@ class Office
     public function getName()
     {
         return $this->name;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

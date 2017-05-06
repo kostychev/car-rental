@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% set title = "Новый клиент" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ title }}</h1>
+        {{ form_start(form) }}
+        {{ form_row(form.lastName, {label: 'Фамилия'}) }}
+        {{ form_row(form.firstName, {label: 'Имя'}) }}
+        {{ form_row(form.middleName, {label: 'Отчество'}) }}
+        {{ form_row(form.phone, {label: 'Номер телефона', help: 'В формате: 89824873654'}) }}
+        {{ form_rest(form) }}
+        <p class="text-right">
+            <a href="{{ path('clients') }}" class="btn btn-danger">Отмена</a>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </p>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

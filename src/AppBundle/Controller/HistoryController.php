@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Car;
-use AppBundle\Entity\Rent;
+use AppBundle\Entity\Order;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +20,12 @@ class HistoryController extends Controller
         $cars = $em->getRepository(Car::class)
             ->findAllWithModels();
 
-        $rents = $em->getRepository(Rent::class)
+        $orders = $em->getRepository(Order::class)
             ->findHistory();
 
         return $this->render('history/index.html.twig', [
-            'cars' => $cars,
-            'rents' => $rents,
+            'cars'   => $cars,
+            'orders' => $orders,
         ]);
     }
 
@@ -44,11 +44,11 @@ class HistoryController extends Controller
                 ->find($carId);
         }
 
-        $rents = $em->getRepository(Rent::class)
+        $orders = $em->getRepository(Order::class)
             ->findHistory($car);
 
         return $this->render('history/ajax.html.twig', [
-            'rents' => $rents,
+            'orders' => $orders,
         ]);
     }
 }

@@ -1,11 +1,11 @@
 <table class="table">
     <tbody>
-    {% for rent in rents %}
+    {% for order in orders %}
         <tr>
-            <th>{{ rent.car }}</th>
-            <th>{{ rent.client }}</th>
-            <th>{{ rent.startAt|date }}</th>
-            <th>{{ rent.endAt|date }}</th>
+            <td>{{ order.car }}</td>
+            <td>{{ order.client }}</td>
+            <td>{{ order.startAt|date }}</td>
+            <td>{{ order.endAt|date }}</td>
         </tr>
     {% endfor %}
     </tbody>
