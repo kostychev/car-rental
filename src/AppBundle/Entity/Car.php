@@ -39,13 +39,13 @@ class Car
      */
     private $model;
 
-    /**
-     * @var Office
-     *
-     * @ORM\ManyToOne(targetEntity="Office")
-     * @ORM\JoinColumn(name="office_id", referencedColumnName="id", nullable=true)
-     */
-    private $office;
+//    /**
+//     * @var Office
+//     *
+//     * @ORM\ManyToOne(targetEntity="Office")
+//     * @ORM\JoinColumn(name="office_id", referencedColumnName="id", nullable=true)
+//     */
+//    private $office;
 
 
     /**
@@ -104,30 +104,6 @@ class Car
     public function getModel()
     {
         return $this->model;
-    }
-
-    /**
-     * Set office
-     *
-     * @param Office $office
-     *
-     * @return Car
-     */
-    public function setOffice(Office $office = null)
-    {
-        $this->office = $office;
-
-        return $this;
-    }
-
-    /**
-     * Get office
-     *
-     * @return Office
-     */
-    public function getOffice()
-    {
-        return $this->office;
     }
 
     /**
