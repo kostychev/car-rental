@@ -4,14 +4,24 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Car;
 use AppBundle\Entity\Order;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Form\OrderType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * История заказов.
+ *
+ * @Route("history")
+ */
 class HistoryController extends Controller
 {
     /**
-     * @Route("history", name="history")
+     * Просмотр истории.
+     *
+     * @Route("/", name="history_index")
+     * @Method("GET")
      */
     public function indexAction()
     {
@@ -30,7 +40,10 @@ class HistoryController extends Controller
     }
 
     /**
-     * @Route("history/ajax", name="history_ajax")
+     * Таблица истории.
+     *
+     * @Route("/ajax", name="history_ajax")
+     * @Method("GET")
      */
     public function ajaxAction(Request $request)
     {
@@ -49,6 +62,33 @@ class HistoryController extends Controller
 
         return $this->render('history/ajax.html.twig', [
             'orders' => $orders,
+        ]);
+    }
+
+    /**
+     * Добавление заказа.
+     *
+     * @Route("/new", name="history_new")
+     * @Method({"GET", "POST"})
+     */
+    public function newAction(Request $request)
+    {
+        $order = new Order();
+        $form = $this->createForm(OrderType::class, $order);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($order);
+            $em->flush();
+
+            $this->addFlash('success', 'Запись успешно создана!');
+
+            return $this->redirectToRoute('history_index');
+        }
+
+        return $this->render('history/new.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

@@ -12,6 +12,6 @@ class DefaultControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertTrue($client->getResponse()->isRedirect('/history'));
+        $this->assertTrue($client->getResponse()->isRedirect('history/'));
     }
 }

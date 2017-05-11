@@ -8,3 +8,9 @@ services:
         class: AppBundle\Form\Extension\HelpExtension
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    app.free_car_validator:
+        class: AppBundle\Validator\Constraints\FreeCarValidator
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: validator.constraint_validator }

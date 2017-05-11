@@ -3,10 +3,17 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Car;
+use AppBundle\Entity\Order;
 use Doctrine\ORM\EntityRepository;
 
 class OrderRepository extends EntityRepository
 {
+    /**
+     * Возвращает список зказов.
+     *
+     * @param Car|null $car
+     * @return Order[]
+     */
     public function findHistory(Car $car = null)
     {
         $qb = $this->createQueryBuilder('o');
@@ -26,6 +33,37 @@ class OrderRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Проверка по заказам, что авто свободен на указанный период времени.
+     *
+     * @param Car $car
+     * @param \DateTime $start
+     * @param \DateTime $end
+     * @return bool
+     */
+    public function carIsFreeForRent(Car $car, \DateTime $start, \DateTime $end)
+    {
+        // кол-во пересеканиий
+        $count = (int)$this->createQueryBuilder('o')
+            ->where('o.car = :car')
+            ->andWhere('o.startAt <= :end AND o.endAt >= :start')
+            ->select('COUNT(o.id)')
+            ->setParameters([
+                'car'   => $car,
+                'start' => $start,
+                'end'   => $end,
+            ])
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $count === 0;
+    }
+
+    /**
+     * Отчет о средней продолжительности проката.
+     *
+     * @return array
+     */
     public function reportByDurationForOfficeAndBrand()
     {
         $sql = "SELECT b.name brand_name, of.name office_name, AVG(DATEDIFF(end_at, start_at)) AS duration

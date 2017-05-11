@@ -3,17 +3,22 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as RentAssert;
 
 /**
  * Заказ
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\OrderRepository")
  * @ORM\Table(name="orders")
+ *
+ * @RentAssert\FreeCar()
  */
 class Order
 {
     const STATUS_NEW = 'new';
     const STATUS_RESERVED = 'reserved';
+    const STATUS_ACTIVE = 'active';
     const STATUS_RETURNED = 'returned';
     const STATUS_CANCELED = 'canceled';
 
@@ -30,6 +35,8 @@ class Order
      * @var \DateTime
      *
      * @ORM\Column(name="start_at", type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\DateTime()
      */
     private $startAt;
 
@@ -37,6 +44,8 @@ class Order
      * @var \DateTime
      *
      * @ORM\Column(name="end_at", type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\DateTime()
      */
     private $endAt;
 
@@ -45,6 +54,7 @@ class Order
      *
      * @ORM\ManyToOne(targetEntity="Office")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
      */
     private $office;
 
@@ -53,6 +63,7 @@ class Order
      *
      * @ORM\ManyToOne(targetEntity="Client")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
      */
     private $client;
 
@@ -61,6 +72,7 @@ class Order
      *
      * @ORM\ManyToOne(targetEntity="Car")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
      */
     private $car;
 
@@ -68,6 +80,8 @@ class Order
      * @var Office
      *
      * @ORM\ManyToOne(targetEntity="Office")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
      */
     private $returnOffice;
 

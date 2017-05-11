@@ -12,7 +12,7 @@
         {{ form_row(form.number, {label: 'Гос. номер', help: 'Например: А123ВВ159'}) }}
         {{ form_rest(form) }}
         <p class="text-right">
-            <a href="{{ path('cars') }}" class="btn btn-danger">Отмена</a>
+            <a href="{{ path('car_index') }}" class="btn btn-danger">Отмена</a>
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </p>
         {{ form_end(form) }}

@@ -15,14 +15,18 @@ class OrderType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $years = range(date('Y'), date('Y') + 1);
+
         $builder
             ->add('client')
             ->add('car')
             ->add('office')
             ->add('startAt', DateTimeType::class, [
+                'years'        => $years,
                 'with_seconds' => false,
             ])
             ->add('endAt', DateTimeType::class, [
+                'years'        => $years,
                 'with_seconds' => false,
             ])
             ->add('returnOffice');

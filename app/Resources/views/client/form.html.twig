@@ -14,7 +14,7 @@
         {{ form_row(form.phone, {label: 'Номер телефона', help: 'В формате: 89824873654'}) }}
         {{ form_rest(form) }}
         <p class="text-right">
-            <a href="{{ path('clients') }}" class="btn btn-danger">Отмена</a>
+            <a href="{{ path('client_index') }}" class="btn btn-danger">Отмена</a>
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </p>
         {{ form_end(form) }}

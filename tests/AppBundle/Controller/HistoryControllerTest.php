@@ -10,7 +10,7 @@ class HistoryControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', 'history');
+        $crawler = $client->request('GET', 'history/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains('История', $crawler->filter('h1')->text());

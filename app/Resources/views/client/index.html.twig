@@ -8,7 +8,7 @@
     <div class="container">
         <h1>{{ title }}</h1>
         <p>
-            <a href="{{ path('new_client') }}" class="btn btn-default">
+            <a href="{{ path('client_new') }}" class="btn btn-default">
                 <span class="glyphicon glyphicon-plus"></span>
                 Новый клиент
             </a>
@@ -21,7 +21,7 @@
                     <td>{{ client }}</td>
                     <td>{{ client.phone }}</td>
                     <td class="text-right text-nowrap">
-                        <a href="{{ path('edit_client', {id: client.id}) }}" class="btn btn-sm">
+                        <a href="{{ path('client_edit', {id: client.id}) }}" class="btn btn-sm">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
                     </td>

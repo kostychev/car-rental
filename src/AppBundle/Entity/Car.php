@@ -39,6 +39,14 @@ class Car
      */
     private $model;
 
+    /**
+     * @var Office
+     *
+     * @ORM\ManyToOne(targetEntity="Office")
+     * @ORM\JoinColumn(name="office_id", referencedColumnName="id", nullable=true)
+     */
+    private $office;
+
 
     /**
      * Get id
@@ -77,11 +85,11 @@ class Car
     /**
      * Set model
      *
-     * @param \AppBundle\Entity\Model $model
+     * @param Model $model
      *
      * @return Car
      */
-    public function setModel(\AppBundle\Entity\Model $model)
+    public function setModel(Model $model)
     {
         $this->model = $model;
 
@@ -91,13 +99,36 @@ class Car
     /**
      * Get model
      *
-     * @return \AppBundle\Entity\Model
+     * @return Model
      */
     public function getModel()
     {
         return $this->model;
     }
 
+    /**
+     * Set office
+     *
+     * @param Office $office
+     *
+     * @return Car
+     */
+    public function setOffice(Office $office = null)
+    {
+        $this->office = $office;
+
+        return $this;
+    }
+
+    /**
+     * Get office
+     *
+     * @return Office
+     */
+    public function getOffice()
+    {
+        return $this->office;
+    }
 
     /**
      * @return Brand

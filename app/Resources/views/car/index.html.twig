@@ -8,7 +8,7 @@
     <div class="container">
         <h1>{{ title }}</h1>
         <p>
-            <a href="{{ path('new_car') }}" class="btn btn-default">
+            <a href="{{ path('car_new') }}" class="btn btn-default">
                 <span class="glyphicon glyphicon-plus"></span>
                 Добавить авто
             </a>
@@ -22,7 +22,7 @@
                     <td>{{ car.model }}</td>
                     <td>{{ car.number }}</td>
                     <td class="text-right text-nowrap">
-                        <a href="{{ path('edit_car', {id: car.id}) }}" class="btn btn-sm">
+                        <a href="{{ path('car_edit', {id: car.id}) }}" class="btn btn-sm">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
                     </td>

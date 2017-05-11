@@ -9,6 +9,7 @@
         <h1>{{ title }}</h1>
 
         {{ form_start(form) }}
+        {{ form_errors(form) }}
         {{ form_row(form.client, {label: 'Клиент'}) }}
         {{ form_row(form.car, {label: 'Авто'}) }}
         {{ form_row(form.office, {label: 'Точка проката'}) }}
@@ -16,7 +17,9 @@
         {{ form_row(form.endAt, {label: 'Дата возврата'}) }}
         {{ form_row(form.returnOffice, {label: 'Точка возврата'}) }}
         {{ form_rest(form) }}
-        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <p class="text-right">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </p>
         {{ form_end(form) }}
     </div>
 {% endblock %}

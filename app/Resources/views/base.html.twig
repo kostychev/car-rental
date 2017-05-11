@@ -21,15 +21,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">АвтоПрокат</a>
+            <a class="navbar-brand" href="/">АвтоПрокат</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ path('orders') }}">Заказы</a></li>
-                <li><a href="{{ path('history') }}">История</a></li>
+                <li><a href="{{ path('history_index') }}">История</a></li>
                 <li><a href="{{ path('report') }}">Отчёт</a></li>
-                <li><a href="{{ path('clients') }}">Клиенты</a></li>
-                <li><a href="{{ path('cars') }}">Автомобили</a></li>
+                <li><a href="{{ path('client_index') }}">Клиенты</a></li>
+                <li><a href="{{ path('car_index') }}">Автомобили</a></li>
             </ul>
         </div>
     </div>

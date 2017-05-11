@@ -1,12 +1,18 @@
-<table class="table">
-    <tbody>
-    {% for order in orders %}
-        <tr>
-            <td>{{ order.car }}</td>
-            <td>{{ order.client }}</td>
-            <td>{{ order.startAt|date }}</td>
-            <td>{{ order.endAt|date }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+{% if orders is not empty %}
+    <table class="table">
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.car }}</td>
+                <td>{{ order.client }}</td>
+                <td>{{ order.office }}</td>
+                <td>{{ order.startAt|date }}</td>
+                <td>{{ order.endAt|date }}</td>
+                <td>{{ order.returnOffice }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Ничего не найдено</p>
+{% endif %}

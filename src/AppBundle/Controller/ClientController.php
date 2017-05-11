@@ -4,17 +4,23 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Client;
 use AppBundle\Form\ClientType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/clients")
+ * Управление клиентами.
+ *
+ * @Route("/client")
  */
-class ClientsController extends Controller
+class ClientController extends Controller
 {
     /**
-     * @Route("/", name="clients")
+     * Список клиентов.
+     *
+     * @Route("/", name="client_index")
+     * @Method("GET")
      */
     public function indexAction()
     {
@@ -22,13 +28,16 @@ class ClientsController extends Controller
             ->getRepository(Client::class)
             ->findAll();
 
-        return $this->render('clients/index.html.twig', [
+        return $this->render('client/index.html.twig', [
             'clients' => $clients,
         ]);
     }
 
     /**
-     * @Route("/new", name="new_client")
+     * Добавление клиента.
+     *
+     * @Route("/new", name="client_new")
+     * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -43,16 +52,19 @@ class ClientsController extends Controller
 
             $this->addFlash('success', 'Запись успешно создана!');
 
-            return $this->redirectToRoute('clients');
+            return $this->redirectToRoute('client_index');
         }
 
-        return $this->render('clients/form.html.twig', [
+        return $this->render('client/form.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="edit_client")
+     * Редактирование клиента.
+     *
+     * @Route("/{id}/edit", name="client_edit", requirements={"id": "\d+"})
+     * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Client $client)
     {
@@ -65,10 +77,10 @@ class ClientsController extends Controller
 
             $this->addFlash('success', 'Запись успешно обновлена!');
 
-            return $this->redirectToRoute('clients');
+            return $this->redirectToRoute('client_index');
         }
 
-        return $this->render('clients/form.html.twig', [
+        return $this->render('client/form.html.twig', [
             'form' => $form->createView(),
         ]);
     }
